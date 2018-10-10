@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/deniz/Downloads/poi-4.0.0/poi-4.0.0.jar"/>
+	<classpathentry kind="lib" path="/home/deniz/Downloads/JAVA_KUTUPHANELER/controlsfx-8.40.14/controlsfx-8.40.14.jar"/>
+	<classpathentry kind="lib" path="/home/deniz/Downloads/JAVA_KUTUPHANELER/New Folder/library/poi-ooxml-schemas-4.0.0.jar"/>
+	<classpathentry kind="lib" path="/home/deniz/Downloads/JAVA_KUTUPHANELER/New Folder/library/poi-ooxml-4.0.0.jar"/>
+	<classpathentry kind="lib" path="/home/deniz/Downloads/JAVA_KUTUPHANELER/New Folder/library/poi-excelant-4.0.0.jar"/>
+	<classpathentry kind="lib" path="/home/deniz/Downloads/JAVA_KUTUPHANELER/New Folder/library/commons-collections4-4.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
