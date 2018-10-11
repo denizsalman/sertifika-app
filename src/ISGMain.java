@@ -115,9 +115,6 @@ public class ISGMain extends Application {
 
         });
 
-
-
-
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Boğaziçi Akademi - OSGB Sertifika Programı");

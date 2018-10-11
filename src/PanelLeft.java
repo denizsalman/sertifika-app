@@ -1,3 +1,5 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -19,22 +21,43 @@ public class PanelLeft extends GridPane {
     private Label labelDigerEgitim = new Label("Diğer Eğitim Bilgileri:");
     private TextField tfDigerEgitim = new TextField();
     private Label labelEgitimci1 = new Label("EĞİTİMCİ 1");
-    private TextField tfAdSoyad1 = new TextField();
-    private TextField tfGorev1 = new TextField();
+    private ComboBox<String> cbEgitimci1 = new ComboBox<>();
     private Label labelEgitimci2 = new Label("EĞİTİMCİ 2");
-    private TextField tfAdSoyad2 = new TextField();
-    private TextField tfGorev2 = new TextField();
+    private ComboBox<String> cbEgitimci2 = new ComboBox<>();
     private Label labelIsveren = new Label("İŞVEREN / İŞVEREN VEKİLİ");
     private TextField tfAdSoyadIsveren = new TextField();
     private Label labelKurum = new Label("VARSA EĞİTİMİ VEREN KURUMUN/KURULUŞUN");
     private TextField tfUnvan = new TextField();
     private ToggleGroup group = new ToggleGroup();
-
-
+    private String[] items = {"Ela Subaşı Ersöz", "Eren Salman", "Murat Uyanık",
+    		"Mehmet Giray Ersöz", "Bülent Genç"};
+    private ObservableList<String> observableList = FXCollections.observableArrayList(items);
+    private String[] egitimciAdSoyad = new String[5];
+    private String[] egitimciGorevUnvan = new String[5];
+    
     public PanelLeft() {
         setPadding(new Insets(30, 20, 20, 20));
         setVgap(5);
-
+        
+        
+        
+        for(int i = 0; i < 5; i++) {
+        	egitimciAdSoyad[i] = items[i].toUpperCase();
+        }
+        
+        
+        egitimciGorevUnvan[0] = "İŞ GÜVENLİĞİ UZMANI / BELGE NO:129996";
+        egitimciGorevUnvan[1] = "İŞ GÜVENLİĞİ UZMANI / BELGE NO:146800";
+        egitimciGorevUnvan[2] = "İŞ GÜVENLİĞİ UZMANI / BELGE NO:148041";
+        egitimciGorevUnvan[3] = "İŞ YERİ HEKİMİ / BELGE NO:12653";
+        egitimciGorevUnvan[4] = "İŞ YERİ HEKİMİ / BELGE NO:10648/94";        
+        
+       
+        cbEgitimci1.setItems(observableList);
+        cbEgitimci1.setValue("");
+        cbEgitimci2.setItems(observableList);
+        cbEgitimci2.setValue("");
+        
         Font fontAltBaslik = Font.font("Times New Roman",
                 FontWeight.BOLD, FontPosture.REGULAR, 15);
         labelEgitimci1.setFont(fontAltBaslik);
@@ -60,16 +83,12 @@ public class PanelLeft extends GridPane {
         add(tfDigerEgitim, 1, row++);
 
         add(labelEgitimci1, 0, row++);
-        add(new Label("Ad Soyad:"), 0, row);
-        add(tfAdSoyad1, 1, row++);
-        add(new Label("Görev Ünvanı:"), 0, row);
-        add(tfGorev1, 1, row++);
+        add(cbEgitimci1, 0, row++, 2, 1);
+    
 
         add(labelEgitimci2, 0, row++);
-        add(new Label("Ad Soyad:"), 0, row);
-        add(tfAdSoyad2, 1, row++);
-        add(new Label("Görev Ünvanı:"), 0, row);
-        add(tfGorev2, 1, row++);
+        add(cbEgitimci2, 0, row++, 2, 1);
+ 
 
         add(labelIsveren, 0, row++, 2, 1);
         add(new Label("Ad Soyad:"), 0, row);
@@ -95,12 +114,24 @@ public class PanelLeft extends GridPane {
         RadioButton chk = (RadioButton) group.getSelectedToggle();
         form.setEgitimTuru(chk.getText());
         form.setDigerIsg(tfDigerEgitim.getText());
-        form.setAdSoyad1(tfAdSoyad1.getText());
-        form.setGorevUnvan1(tfGorev1.getText());
-        form.setAdSoyad2(tfAdSoyad2.getText());
-        form.setGorevUnvan2(tfGorev2.getText());
         form.setIsverenAdSoyad(tfAdSoyadIsveren.getText());
         form.setKurumUnvan(tfUnvan.getText());
+        
+        int index;
+        if (observableList.contains(cbEgitimci1.getValue())) {
+	        index = observableList.indexOf(cbEgitimci1.getValue());
+	        form.setAdSoyad1(egitimciAdSoyad[index]);
+	        form.setGorevUnvan1(egitimciGorevUnvan[index]);
+        }
+        
+        if (observableList.contains(cbEgitimci2.getValue())) {
+            index = observableList.indexOf(cbEgitimci2.getValue());
+            form.setAdSoyad2(egitimciAdSoyad[index]);
+            form.setGorevUnvan2(egitimciGorevUnvan[index]);
+		}
+
         return form;
     }
+    
+    
 }
