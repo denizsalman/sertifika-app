@@ -120,7 +120,7 @@ public class TablePane extends VBox {
 			
 			int row;
 			int col;
-			System.out.println(sheet.getPhysicalNumberOfRows());
+			
 			for(row = 1;row < sheet.getPhysicalNumberOfRows(); row++) {
 				ArrayList<String> personFields = new ArrayList<>();
 				for(col = 0; col < sheet.getRow(row).getLastCellNum(); col++) {
