@@ -192,12 +192,12 @@ public class ISGMain extends Application {
             cell = sheet.getRow(colNumber++).getCell('G' - 'A');
             cell.setCellValue("k  o  n  u     s  o  n  u  -----------------------------------------------------------------------------------------------------");
 
-
             inputStream.close();
-
+            
             FileOutputStream outputStream = new FileOutputStream(selectedDirectory +
                     "/Sertifika-"+ person.getFirstName() + ".xls");
             workbook.write(outputStream);
+            workbook.close();
             outputStream.close();
 
 
@@ -207,4 +207,7 @@ public class ISGMain extends Application {
             e.printStackTrace();
         }
         }
+    public static void main(String[] args) {
+		launch(args);
+	}
 }
