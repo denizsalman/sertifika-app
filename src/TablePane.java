@@ -1,3 +1,13 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +20,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 public class TablePane extends VBox {
     private TableView<Person> tableView = new TableView<>();
@@ -18,7 +31,8 @@ public class TablePane extends VBox {
             FXCollections.observableArrayList(
 
             );
-
+    private Button btImport = new Button("Excelden Aktar");
+    
     public TablePane() {
         setSpacing(5);
         Font fontHeader = Font.font("Times New Roman",
@@ -26,7 +40,20 @@ public class TablePane extends VBox {
         label.setFont(fontHeader);
 
         tableView.setEditable(true);
-
+       
+        Stage stage = new Stage();
+        
+	    btImport.setOnAction(event -> {
+	    	   FileChooser fileChooser = new FileChooser();
+	    	   fileChooser.setTitle("Excel Dosyası Seç");
+	    	   FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter(
+	    			   "Excel files (*.xlsx)","*.xlsx");
+	    	   fileChooser.getExtensionFilters().add(extensionFilter);
+	    	   File fileImport = fileChooser.showOpenDialog(stage);
+	    	   excelImport(fileImport);
+	    	   
+	      });
+        
 
         getChildren().addAll(label, tableView);
         setAlignment(Pos.CENTER);
@@ -73,13 +100,50 @@ public class TablePane extends VBox {
                 addGorevUnvan.clear();
             }
         });
-
-        hb.getChildren().addAll(addFirstName, addLastName, addGorevUnvan, addButton);
+        
+        final Button deleteButton = new Button("Sil");
+        deleteButton.setOnAction(event -> {
+        	Person selectedItem = tableView.getSelectionModel().getSelectedItem();
+        	tableView.getItems().remove(selectedItem);
+        });
+        
+        hb.getChildren().addAll(addFirstName, addLastName, addGorevUnvan, addButton, deleteButton, btImport);
         getChildren().addAll(hb);
 
     }
 
-    public ObservableList<Person> getData() {
+    private void excelImport(File fileImport) {
+		try {
+			FileInputStream inputStream = new FileInputStream(fileImport);
+			XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			
+			int row;
+			int col;
+			
+			for(row = 1;row < sheet.getPhysicalNumberOfRows(); row++) {
+				ArrayList<String> personFields = new ArrayList<>();
+				for(col = 0; col < sheet.getRow(row).getLastCellNum(); col++) {
+					Cell cell = sheet.getRow(row).getCell(col);
+					personFields.add(cell.getStringCellValue());
+				}
+				data.add(new Person(personFields.get(0), personFields.get(1), personFields.get(2)));
+			}
+			
+			inputStream.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	public ObservableList<Person> getData() {
         return data;
     }
 

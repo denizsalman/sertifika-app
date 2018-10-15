@@ -8,5 +8,7 @@
 	<classpathentry kind="lib" path="/home/deniz/Downloads/JAVA_KUTUPHANELER/New Folder/library/poi-ooxml-4.0.0.jar"/>
 	<classpathentry kind="lib" path="/home/deniz/Downloads/JAVA_KUTUPHANELER/New Folder/library/poi-excelant-4.0.0.jar"/>
 	<classpathentry kind="lib" path="/home/deniz/Downloads/JAVA_KUTUPHANELER/New Folder/library/commons-collections4-4.2.jar"/>
+	<classpathentry kind="lib" path="/home/deniz/Downloads/poi-4.0.0/ooxml-lib/xmlbeans-3.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/deniz/Downloads/JAVA_KUTUPHANELER/commons-compress-1.18.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

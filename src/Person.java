@@ -4,8 +4,9 @@ public class Person {
     private final SimpleStringProperty firstName;
     private final SimpleStringProperty lastName;
     private final SimpleStringProperty gorevUnvan;
+    
 
-    public Person(String firstName, String lastName, String gorevUnvan) {
+	public Person(String firstName, String lastName, String gorevUnvan) {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.gorevUnvan = new SimpleStringProperty(gorevUnvan);
