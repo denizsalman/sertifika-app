@@ -1,3 +1,4 @@
+package tr.com.bogaziciakademi;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Person {

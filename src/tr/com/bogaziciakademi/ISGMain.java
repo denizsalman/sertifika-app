@@ -1,3 +1,4 @@
+package tr.com.bogaziciakademi;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -23,6 +24,8 @@ import org.apache.poi.ss.usermodel.Font;
 import org.controlsfx.control.Notifications;
 
 import java.io.*;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class ISGMain extends Application {
@@ -84,35 +87,19 @@ public class ISGMain extends Application {
                 excelRapor(persons.get(i), selectedDirectory);
             }
 
-            if (selectedDirectory != null) {
-                //Success Notification\\
-                ImageView imageView = new ImageView("img/confirm.png");
-                imageView.setFitHeight(50);
-                imageView.setFitWidth(50);
-                Notifications notificationBuilder = Notifications.create()
-                        .title("İşlem Başarılı")
-                        .text("  " + selectedDirectory + " klasörüne kaydedildi")
-                        .graphic(imageView)
-                        .hideAfter(Duration.seconds(5))
-                        .position(Pos.BOTTOM_RIGHT);
-                notificationBuilder.darkStyle();
-                notificationBuilder.show();
-                //End of Success Notification\\
-            } else {
-                ImageView imageView = new ImageView("img/error.png");
-                imageView.setFitHeight(50);
-                imageView.setFitWidth(50);
-                Notifications notificationBuilder = Notifications.create()
-                        .title("İşlem Başarısız")
-                        .text("Kayıt yapılamadı. Kayıt edilecek klasörün doğru seçildiğine emin olun.")
-                        .graphic(imageView)
-                        .hideAfter(Duration.seconds(5))
-                        .position(Pos.BOTTOM_RIGHT);
-                notificationBuilder.darkStyle();
-                notificationBuilder.show();
+            if (selectedDirectory == null) {
+            	 ImageView imageView = new ImageView("/files/error.png");
+                 imageView.setFitHeight(50);
+                 imageView.setFitWidth(50);
+                 Notifications notificationBuilder = Notifications.create()
+                         .title("İşlem Başarısız")
+                         .text("Kayıt yapılamadı. Kayıt edilecek klasörün doğru seçildiğine emin olun.")
+                         .graphic(imageView)
+                         .hideAfter(Duration.seconds(5))
+                         .position(Pos.BOTTOM_RIGHT);
+                 notificationBuilder.darkStyle();
+                 notificationBuilder.show();
             }
-
-
         });
 
         Scene scene = new Scene(borderPane);
@@ -123,8 +110,9 @@ public class ISGMain extends Application {
 
     private void excelRapor(Person person, File selectedDirectory) {
         try {
-            File file = new File("Bogazici.xls");
-            FileInputStream inputStream = new FileInputStream(file);
+        
+        	InputStream inputStream = ISGMain.class.getResourceAsStream("/files/Bogazici.xls");
+            
             HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
             HSSFSheet sheet = workbook.getSheetAt(0);
             BilgiForm form = panelLeft.createForm();
@@ -199,12 +187,33 @@ public class ISGMain extends Application {
             workbook.write(outputStream);
             workbook.close();
             outputStream.close();
+            
+          //Success Notification\\
+            ImageView imageView = new ImageView("files/confirm.png");
+            imageView.setFitHeight(50);
+            imageView.setFitWidth(50);
+            Notifications notificationBuilder = Notifications.create()
+                    .title("İşlem Başarılı")
+                    .text("  " + selectedDirectory + " klasörüne kaydedildi")
+                    .graphic(imageView)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.BOTTOM_RIGHT);
+            notificationBuilder.darkStyle();
+            notificationBuilder.show();
+            //End of Success Notification\\
 
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+        	  ImageView imageView = new ImageView("files/error.png");
+              imageView.setFitHeight(50);
+              imageView.setFitWidth(50);
+              Notifications notificationBuilder = Notifications.create()
+                      .title("İşlem Başarısız")
+                      .text(e.getMessage())
+                      .graphic(imageView)
+                      .hideAfter(Duration.seconds(5))
+                      .position(Pos.BOTTOM_RIGHT);
+              notificationBuilder.darkStyle();
+              notificationBuilder.show();
         }
         }
     public static void main(String[] args) {

@@ -1,3 +1,4 @@
+package tr.com.bogaziciakademi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -129,7 +130,7 @@ public class TablePane extends VBox {
 				}
 				data.add(new Person(personFields.get(0), personFields.get(1), personFields.get(2)));
 			}
-			
+			workbook.close();
 			inputStream.close();
 			
 		} catch (FileNotFoundException e) {

@@ -1,3 +1,4 @@
+package tr.com.bogaziciakademi;
 import javafx.geometry.Insets;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;

@@ -1,3 +1,4 @@
+package tr.com.bogaziciakademi;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;

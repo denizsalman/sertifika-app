@@ -1,3 +1,4 @@
+package tr.com.bogaziciakademi;
 import java.util.ArrayList;
 
 public class BilgiForm {

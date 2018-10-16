@@ -1,3 +1,4 @@
+package tr.com.bogaziciakademi;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
